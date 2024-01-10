@@ -1,0 +1,59 @@
+body{
+    box-sizing: border-box;
+}
+
+p{margin: 0;}
+
+.routeBox,.routeTitleBox{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.routesDisplay{
+    width: fit-content;
+}
+
+.routeTitleBox{
+    background-color: #008B8B;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.route,.routeTitle{
+    width: 350px;
+    border-right: solid 2px;
+    padding: 5px 15px;
+}
+
+.cost,.costTitle{
+    width: 100px;
+    border-right: solid 2px;
+    padding: 5px 15px;
+}
+
+.duration,.durationTitle{
+    width: 100px;
+    padding: 5px 15px;
+}
+
+select[name='asc_desc']{
+    font-size : 20px;
+    margin-bottom: 15px;
+}
+
+.selectTrafficType{
+    display: flex;
+    margin: 15px 0;
+    align-items: center;
+}
+
+.selectTrafficTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input{
+    /* vertical-align:baseline; */
+    margin-left: 15px;
+}
