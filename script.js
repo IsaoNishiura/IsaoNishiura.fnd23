@@ -36,22 +36,23 @@ const trafficType = [
   {type:"taxi", display:"タクシー"}
 ]
 
-
-var sortAscRoutes = function(a, b){
-  return a.cost - b.cost 
+function sortAscRoutes(a, b){
+    return a.cost - b.cost 
 }
 
-var sortDescRoutes = function(a, b){
-  return b.cost - a.cost  
+function sortDescRoutes(a, b){
+    return b.cost - a.cost  
 }
 
-function getSortedByCost(costList,sortCallBack){
-  costList.sort(sortCallBack)
-  return costList
+function getSortedByCost(sortCallBack){
+  return function routesSort(routes){
+    routes.sort(sortCallBack)
+    return routes
+  }
 }
 
-// test(getSortedByCost(routes,sortAscRoutes), routesByCost);
-// test(getSortedByCost(routes,sortDescRoutes),routes);
+const getSortedByCostAsc = getSortedByCost(sortAscRoutes)
+const getSortedByCostDesc = getSortedByCost(sortDescRoutes)
 
 function appendHtmlItem(parentItem, tag , className, textContent){
   const appendItem = document.createElement(tag)
@@ -107,6 +108,13 @@ function removeItem(){
   }
 }
 
+function colorBackgroundEverOther(selector){
+  document.querySelectorAll(selector).forEach(function(htmlItem,idx){
+    idx % 2 === 1 && (htmlItem.style.background = "#AAA")
+  })
+}
+
+
 document.addEventListener("DOMContentLoaded", function(){
   //***** 交通手段選択 *****
   const selectArea = document.querySelector(".selectTrafficType")
@@ -119,8 +127,10 @@ document.addEventListener("DOMContentLoaded", function(){
   const ascDescItem = document.querySelector("select[name='asc_desc']")
 
   //***** 初期結果表示 *****
-  getSortedByCost(routes,sortAscRoutes)
+  // getSortedByCost(routes,sortAscRoutes)
+  getSortedByCostAsc(routes)
   appendItemSet(routes)
+  colorBackgroundEverOther(".routeBox")
 
   //***** 条件絞り込み *****
   selectTraffic.forEach(function(v){
@@ -137,12 +147,16 @@ document.addEventListener("DOMContentLoaded", function(){
   function refresh(){
     const checkedRoutes = getCheckRoutes()
     if(ascDescItem.value === "asc"){
-      getSortedByCost(checkedRoutes,sortAscRoutes)
+      // getSortedByCost(checkedRoutes,sortAscRoutes)
+      getSortedByCostAsc(checkedRoutes)
     }else{
-      getSortedByCost(checkedRoutes,sortDescRoutes)
+      // getSortedByCost(checkedRoutes,sortDescRoutes)
+      getSortedByCostDesc(checkedRoutes)
+
     }
     removeItem()
     appendItemSet(checkedRoutes)
+    colorBackgroundEverOther(".routeBox")
   }
 
   function getCheckRoutes(){
