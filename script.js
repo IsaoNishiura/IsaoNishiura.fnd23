@@ -64,15 +64,15 @@ function appendHtmlItem(parentItem, tag , className, textContent){
 
 function appendInputItem(parentItem, type){
   
-  //2.書き込むもの
+  //要素作成
   const appendItem = document.createElement("input")
   
-  //3.書き込むものを
+  //属性設定
   appendItem.value = type 
   appendItem.name = "trafficType"
   appendItem.type = "checkbox"
   
-  //1.書き込み
+  //要素追加
   parentItem.appendChild(appendItem)
   return appendItem
 }
@@ -108,7 +108,7 @@ function removeItem(){
   }
 }
 
-function colorBackgroundEverOther(selector){
+function colorBackgroundEveryOther(selector){
   document.querySelectorAll(selector).forEach(function(htmlItem,idx){
     idx % 2 === 1 && (htmlItem.style.background = "#AAA")
   })
@@ -127,10 +127,9 @@ document.addEventListener("DOMContentLoaded", function(){
   const ascDescItem = document.querySelector("select[name='asc_desc']")
 
   //***** 初期結果表示 *****
-  // getSortedByCost(routes,sortAscRoutes)
   getSortedByCostAsc(routes)
   appendItemSet(routes)
-  colorBackgroundEverOther(".routeBox")
+  colorBackgroundEveryOther(".routeBox")
 
   //***** 条件絞り込み *****
   selectTraffic.forEach(function(v){
@@ -147,33 +146,28 @@ document.addEventListener("DOMContentLoaded", function(){
   function refresh(){
     const checkedRoutes = getCheckRoutes()
     if(ascDescItem.value === "asc"){
-      // getSortedByCost(checkedRoutes,sortAscRoutes)
       getSortedByCostAsc(checkedRoutes)
     }else{
-      // getSortedByCost(checkedRoutes,sortDescRoutes)
       getSortedByCostDesc(checkedRoutes)
-
     }
     removeItem()
     appendItemSet(checkedRoutes)
-    colorBackgroundEverOther(".routeBox")
+    colorBackgroundEveryOther(".routeBox")
   }
 
   function getCheckRoutes(){
-    const checkedTraffic = Array.prototype.filter.call(selectTraffic,function(v){
-      return v.checked
-    }).map(function(v){
-      return v.value
-    })
+    const checkedTraffic = Array.prototype.filter.call(
+      selectTraffic, v => v.checked
+    ).map(
+      v => v.value
+    )
 
     if(checkedTraffic.length === 0){
       return JSON.parse(JSON.stringify(routes))
     }
 
-    return routes.filter(function(v){
-        return checkedTraffic.some(function(v2){
-          return v.time.hasOwnProperty(v2)
-        })
+    return routes.filter((v) => {
+        return checkedTraffic.some(v2 => v.time.hasOwnProperty(v2))
     })
   }
 })
