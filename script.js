@@ -1,15 +1,4 @@
 'use strict'
-// 1行目に記載している 'use strict' は削除しないでください
-// function test(actual, expected) {
-//     if (JSON.stringify(actual) === JSON.stringify(expected)) {
-//       console.log("OK! Test PASSED.");
-//     } else {
-//       console.error("Test FAILED. Try again!");
-//       console.log("    actual: ", actual);
-//       console.log("  expected: ", expected);
-//       console.trace();
-//     }
-// }
 
 const routes = [
   { route: "タクシー", time: { taxi: 74}, cost: 15720},
@@ -19,15 +8,6 @@ const routes = [
   { route: "ミュースカイ＋神宮前＋バス", time: { kintetsu: 21, transit: 10, bus: 30, walk: 3 }, cost: 1330 },
   { route: "ミュースカイ＋金山＋地下鉄", time: { kintetsu: 32, transit: 5, subway: 8, walk: 6 }, cost: 1030 },
 ]
-
-// const routesByCost = [
-//  { route: "ミュースカイ＋金山＋地下鉄", time: { kintetsu: 32, transit: 5, subway: 8, walk: 6 }, cost: 1030 },
-//  { route: "ミュースカイ＋神宮前＋バス", time: { kintetsu: 21, transit: 10, bus: 30, walk: 3 }, cost: 1330 },
-//  { route: "ミュースカイ＋金山＋バス", time: { kintetsu: 24, transit: 17, bus: 24, walk: 3 }, cost: 1400 },
-//  { route: "ミュースカイ＋金山＋地下鉄", time: { kintetsu: 24, transit: 6, subway: 8, walk: 6 }, cost: 1400 },
-//  { route: "ミュースカイ＋名古屋＋地下鉄", time: { kintetsu: 29, transit: 7, subway: 5, walk: 6 }, cost: 1460 },
-//  { route: "タクシー", time: { taxi: 74}, cost: 15720},
-// ]
 
 const trafficType = [
   {type:"kintetsu", display:"ミュースカイ"}, 
